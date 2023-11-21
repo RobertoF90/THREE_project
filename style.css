@@ -15,10 +15,10 @@ body {
   outline: none;
 }
 
-#ui {
+#ui-br {
   position: absolute;
   bottom: 0;
-  left: 0;
+  right: 0;
   outline: none;
 }
 
