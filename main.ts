@@ -2,6 +2,13 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as dat from 'lil-gui';
 
+import HeroStateMachine from "./HeroStateMachine";
+import { drawUI } from './ui';
+
+
+
+const hero1 = new HeroStateMachine();
+
 // const gui = new dat.GUI();
 const canvas = document.getElementById('canvas') as HTMLElement;
 const scene = new THREE.Scene();
@@ -85,6 +92,9 @@ function animate(time: number) {
     camera.aspect = canvas.clientWidth / canvas.clientHeight;
     camera.updateProjectionMatrix();
   }
+
+  hero1.update();
+  drawUI(hero1)
 
   //   cubes.forEach((cube, ndx) => {
   //     const speed = 1 + ndx * 0.1;

@@ -1,9 +1,16 @@
-const uiBR = document.getElementById('ui-br') as HTMLElement;
-const uiTR = document.getElementById('ui-tr') as HTMLElement;
-const uiMenu = document.getElementById('ui-menu') as HTMLElement;
+import HeroStateMachine from './HeroStateMachine';
+import HeroATB from './ui/HeroATB';
+
+const uiBR = document.getElementById('ui-br') as HTMLCanvasElement;
+const uiTR = document.getElementById('ui-tr') as HTMLCanvasElement;
+const uiMenu = document.getElementById('ui-menu') as HTMLCanvasElement;
 const ctxBR = uiBR.getContext('2d');
 const ctxTR = uiTR.getContext('2d');
 const ctxMenu = uiMenu.getContext('2d');
+
+const heroATB = new HeroATB(window.innerWidth / 2, window.innerHeight / 6 );
+
+
 
 ctxBR.canvas.width = window.innerWidth / 2;
 ctxBR.canvas.height = window.innerHeight / 6;
@@ -14,7 +21,7 @@ ctxMenu.canvas.width = window.innerWidth / 4;
 ctxMenu.canvas.height = window.innerHeight / 3.5;
 
 
-function draw() {
+export function drawUI(hero1: HeroStateMachine) {
   if (uiBR.getContext) {
     const width = uiBR.clientWidth;
     const height = uiBR.clientHeight;
@@ -28,12 +35,12 @@ function draw() {
     ctxBR.fillText('ATB', padding * 2, height / 2.5);
     ctxBR.fillText('LIMIT', padding * 2, height / 1.2);
 
-    console.log(width / 4);
-    console.log(padding * 19);
+    // console.log(width / 4);
+    // console.log(padding * 19);
 
-    ctxBR.fillStyle = '#fff';
-    ctxBR.fillRect(width / 4, height / 4, width / 4 - padding, padding);
+    heroATB.update(hero1.cur_cooldown)
 
+  
     ctxBR.fillStyle = '#fff';
     ctxBR.fillRect((width / 4) * 2, height / 4, width / 4 - padding, padding);
 
@@ -87,4 +94,3 @@ function draw() {
    
   }
 }
-draw();
