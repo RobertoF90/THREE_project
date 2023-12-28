@@ -1,5 +1,6 @@
-import HeroStateMachine from './HeroStateMachine';
-import HeroATB from './ui/HeroATB';
+import HeroStateMachine from '../HeroStateMachine';
+import HeroATB from './ATB';
+import Limit from './Limit';
 
 const uiBR = document.getElementById('ui-br') as HTMLCanvasElement;
 const uiTR = document.getElementById('ui-tr') as HTMLCanvasElement;
@@ -8,7 +9,9 @@ const ctxBR = uiBR.getContext('2d');
 const ctxTR = uiTR.getContext('2d');
 const ctxMenu = uiMenu.getContext('2d');
 
-const heroATB = new HeroATB(window.innerWidth / 2, window.innerHeight / 6 );
+const width = uiBR.clientWidth;
+const height = uiBR.clientHeight;
+const padding = 12;
 
 
 
@@ -21,11 +24,22 @@ ctxMenu.canvas.width = window.innerWidth / 4;
 ctxMenu.canvas.height = window.innerHeight / 3.5;
 
 
+const hero1ATB = new HeroATB(width, height, width, padding );
+
+const hero1Limit = new Limit(width, height * 3, width, padding)
+
+const hero2ATB = new HeroATB(width * 2, height, width, padding );
+
+const hero2Limit = new Limit(width * 2, height * 3, width, padding)
+
+const hero3ATB = new HeroATB( width * 3, height, width, padding)
+
+const hero3Limit = new Limit(width * 3, height * 3, width, padding)
+
+
 export function drawUI(hero1: HeroStateMachine) {
   if (uiBR.getContext) {
-    const width = uiBR.clientWidth;
-    const height = uiBR.clientHeight;
-    const padding = 12;
+   
 
     ctxBR.fillStyle = '#FFA500';
     ctxBR.fillRect(0, 0, width, height);
@@ -35,22 +49,14 @@ export function drawUI(hero1: HeroStateMachine) {
     ctxBR.fillText('ATB', padding * 2, height / 2.5);
     ctxBR.fillText('LIMIT', padding * 2, height / 1.2);
 
-    // console.log(width / 4);
-    // console.log(padding * 19);
+    hero1ATB.update(hero1.cur_cooldown)
+    hero2ATB.update(hero1.cur_cooldown)
+    hero3ATB.update(hero1.cur_cooldown)
 
-    heroATB.update(hero1.cur_cooldown)
+    hero1Limit.update(hero1.cur_cooldown)
+    hero2Limit.update(hero1.cur_cooldown)
+    hero3Limit.update(hero1.cur_cooldown)
 
-  
-    ctxBR.fillStyle = '#fff';
-    ctxBR.fillRect((width / 4) * 2, height / 4, width / 4 - padding, padding);
-
-    ctxBR.fillRect((width / 4) * 3, height / 4, width / 4 - padding, padding);
-
-    ctxBR.fillRect(width / 4, height / 1.5, width / 4 - padding, padding);
-
-    ctxBR.fillRect((width / 4) * 2, height / 1.5, width / 4 - padding, padding);
-
-    ctxBR.fillRect((width / 4) * 3, height / 1.5, width / 4 - padding, padding);
   }
   if (uiTR.getContext) {
     const width = uiTR.clientWidth;

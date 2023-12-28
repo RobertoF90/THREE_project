@@ -18,7 +18,7 @@ export default class HeroStateMachine {
         this.currentState = this.turnState[0];
 
         this.cur_cooldown = 0;
-        this.max_cooldown = width / 4  - 12;
+        this.max_cooldown = 100;
     }
 
 

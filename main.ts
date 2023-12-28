@@ -3,7 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as dat from 'lil-gui';
 
 import HeroStateMachine from "./HeroStateMachine";
-import { drawUI } from './ui';
+import { drawUI } from './ui/ui';
 
 
 
